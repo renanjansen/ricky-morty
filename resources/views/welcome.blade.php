@@ -62,7 +62,7 @@
 <body class="">
 
 
-    @for ($i = 0; $i < 10; $i++)
+    @for ($i = 0; $i < count($data); $i++)
         {{ json_encode($data[$i]->name) }}
     @endfor
 
