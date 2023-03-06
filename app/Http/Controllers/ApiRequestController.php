@@ -14,11 +14,18 @@ class ApiRequestController extends Controller
         $client = new \GuzzleHttp\Client();
         $url  = 'https://rickandmortyapi.com/api/character';
 
-        $res = $client->get($url);
-        $stream = $res->getBody();
-        $content = json_decode($stream->getContents());
-        $data = json_encode($content->results);
 
+        $resposta = $client->request('GET', $url);
+        $res = $client->get($url);
+        $stream = $resposta->getBody();
+        $content = json_decode($stream->getContents());
+        $data = $content->results;
+
+        //var_dump($data);
+
+        /*foreach($data as $personagens){
+            dump($personagens);
+        }*/
         $charactersResposta =  'character';
         $locationsResposta = 'location' ;
         $episodesResposta = 'episode' ;
