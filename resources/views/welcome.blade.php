@@ -16,6 +16,10 @@
 
 <body class="container text-center bg-dark">
     <div class="container-fluid p-5">
+        <div id="app">
+            {{-- the Vue component --}}
+            <Home />
+        </div>
         <div class="row row-cols-auto d-flex justify-content-center">
             @for ($i = 0; $i < count($data); $i++)
                 <div class="card p-2 m-2" style="width: 18rem; background-color:#7FFFD4;">
@@ -64,6 +68,7 @@
             @endfor
         </div>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
