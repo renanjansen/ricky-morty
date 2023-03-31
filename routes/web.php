@@ -14,4 +14,4 @@ use App\Http\Controllers\ApiRequestController;
 |
 */
 
-Route::get('/' ,[ApiRequestController::class, 'requereApi']);
+Route::get('/' ,[ApiRequestController::class, 'requereApi'])->name('home');
