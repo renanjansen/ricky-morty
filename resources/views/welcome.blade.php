@@ -21,26 +21,21 @@
         </div>
         <div class="row row-cols-auto d-flex justify-content-center">
 
-            
-                @for ($i = 0; $i < count($data); $i++)
-                   @component('componentes.card',
-                    [
-                        'nome' =>  str_replace('"', ' ', json_encode($data[$i]->name)),
-                        'especie' => str_replace('"', ' ', json_encode($data[$i]->species)),
-                        'imagem' => str_replace('"', '', json_encode($data[$i]->image)) ,
-                        'id' =>json_encode($data[$i]->id),
-                        'genero' => str_replace('"', ' ', json_encode($data[$i]->gender)),
-                        'nome_original' => str_replace('"', ' ', json_encode($data[$i]->origin->name)),
-                        'localizacao' => str_replace('"', ' ', json_encode($data[$i]->location->name)),
-                        'status' => str_replace('"', ' ', json_encode($data[$i]->status)),
 
-                    
-                    
-                    ])
-                       
-                   @endcomponent
-                @endfor
-            
+            @for ($i = 0; $i < count($data); $i++)
+                @component('componentes.card', [
+                    'nome' => $data[$i]->name,
+                    'especie' => $data[$i]->species,
+                    'imagem' => $data[$i]->image,
+                    'id' => $data[$i]->id,
+                    'genero' => $data[$i]->gender,
+                    'nome_original' => $data[$i]->origin->name,
+                    'localizacao' => $data[$i]->location->name,
+                    'status' => $data[$i]->status,
+                ])
+                @endcomponent
+            @endfor
+
 
         </div>
     </div>
