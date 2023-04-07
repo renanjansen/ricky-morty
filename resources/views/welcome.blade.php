@@ -16,27 +16,16 @@
 
 <body class="container text-center bg-dark">
     <div class="container-fluid p-5">
-        <div id="app">
-            <Home />
-        </div>
-        <div class="row row-cols-auto d-flex justify-content-center">
 
-
-            @for ($i = 0; $i < count($data); $i++)
-                @component('componentes.card', [
-                    'nome' => $data[$i]->name,
-                    'especie' => $data[$i]->species,
-                    'imagem' => $data[$i]->image,
-                    'id' => $data[$i]->id,
-                    'genero' => $data[$i]->gender,
-                    'nome_original' => $data[$i]->origin->name,
-                    'localizacao' => $data[$i]->location->name,
-                    'status' => $data[$i]->status,
-                ])
-                @endcomponent
-            @endfor
-
-
+        <div id="app" class="row row-cols-auto d-flex justify-content-center">
+           
+                @for ($i = 0; $i < count($data); $i++)
+                    
+                        <card nome="{{ $data[$i]->name }}" especie="{{ $data[$i]->name }}"
+                            imagem="{{ $data[$i]->image }}" id="{{ $data[$i]->id }}" genero="{{ $data[$i]->gender }}"
+                            nome_original="{{ $data[$i]->origin->name }}" localizacao="{{ $data[$i]->location->name }}"
+                            status="{{ $data[$i]->status }}"></card>
+                @endfor
         </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
