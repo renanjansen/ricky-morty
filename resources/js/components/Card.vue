@@ -9,7 +9,7 @@
       </button>
     </div>
 
-    <modal :id="'exampleModal' + id" :nome="nome" :especie="especie" :genero="genero" :nome_original="nome_original" :localizacao="localizacao" :status="status" :imagem="imagem"></modal>
+    <modal :id="'exampleModal' + id" :nome="nome" :especie="especie" :genero="genero" :nome_original="nome_original" :localizacao="localizacao" :status="status" :imagem="imagem" :episode="episode"  ></modal>
 
   </div>
 </template>
@@ -30,7 +30,8 @@ export default {
     genero: String,
     nome_original: String,
     localizacao: String,
-    status: String
+    status: String,
+    episode: String,
   }
 }
 </script>

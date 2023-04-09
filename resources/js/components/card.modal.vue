@@ -23,6 +23,10 @@
             <li class="list-group-item list-group-item-action">
               Status: {{ status }}
             </li>
+            <li class="list-group-item list-group-item-action">
+            <a class="btn btn-primary" :href="episode" role="button" target="_blank">Episódio</a>
+              
+            </li>
           </ul>
         </div>
         <div class="modal-footer">
@@ -43,7 +47,8 @@ export default {
     genero: String,
     nome_original: String,
     localizacao: String,
-    status: String
+    status: String,
+    episode: String,
   },
 };
 </script>

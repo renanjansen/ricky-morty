@@ -24,7 +24,7 @@
                         <card nome="{{ $data[$i]->name }}" especie="{{ $data[$i]->name }}"
                             imagem="{{ $data[$i]->image }}" id="{{ $data[$i]->id }}" genero="{{ $data[$i]->gender }}"
                             nome_original="{{ $data[$i]->origin->name }}" localizacao="{{ $data[$i]->location->name }}"
-                            status="{{ $data[$i]->status }}"></card>
+                            status="{{ $data[$i]->status }}" episode="{{ $primeirosEpisodios[$i] }}"></card>
                 @endfor
         </div>
     </div>
