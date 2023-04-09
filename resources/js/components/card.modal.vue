@@ -9,22 +9,22 @@
         <div class="modal-body">
           <ul class="list-group justify-content-center">
             <li class="list-group-item list-group-item-action">
-              Espécie: {{ especie }}
+              EspÃ©cie: {{ especie }}
             </li>
             <li class="list-group-item list-group-item-action">
-              Gênnero: {{ genero }}
+              GÃªnnero: {{ genero }}
             </li>
             <li class="list-group-item list-group-item-action">
               Origen: {{ nome_original }}
             </li>
             <li class="list-group-item list-group-item-action">
-              Localização: {{ localizacao }}
+              LocalizaÃ§Ã£o: {{ localizacao }}
             </li>
             <li class="list-group-item list-group-item-action">
               Status: {{ status }}
             </li>
             <li class="list-group-item list-group-item-action">
-            <a class="btn btn-primary" :href="episode" role="button" target="_blank">Episódio</a>
+            <a class="btn btn-primary" :href="episode" role="button" target="_blank">Episï¿½dio</a>
               
             </li>
           </ul>
