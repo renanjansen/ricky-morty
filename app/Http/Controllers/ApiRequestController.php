@@ -12,7 +12,7 @@ class ApiRequestController extends Controller
         $pos = strpos($episodios, "episode/") + strlen("episode/");
         $episodio = substr($episodios, $pos);
 
-        // trata episódios menores que 10
+        // trata episï¿½dios menores que 10
 
         if($episodio < 10){
             $episodio = '0'.$episodio;
@@ -25,15 +25,25 @@ class ApiRequestController extends Controller
          return $primeiroEpisodio ;
     }
 
-    public function requereApi()
+    public function requereApi(Request $request)
     {
         $client = new Client();
-        $url = 'https://rickandmortyapi.com/api/character';
+        $pagina = $request->id;
+       
+       // $pagina += $pagina;
+        //var_dump($pagina);
+        $url = 'https://rickandmortyapi.com/api/character/?page='.$pagina;
 
         $resposta = $client->request('GET', $url);
         $stream = $resposta->getBody();
+        
         $content = json_decode($stream->getContents());
-
+        $count = $content->info->count;
+        $paginas =$content->info->pages;
+        if($pagina == null || $pagina <= 0 || $pagina > $count){
+            $pagina = 1;
+        }
+        
         $data = $content->results;
         $primeirosEpisodios = [];
         
@@ -44,10 +54,13 @@ class ApiRequestController extends Controller
 
         
       
-       //dd($primeirosEpisodios);
+      // dd($content->info);
+       
         return view('welcome', [
             'data' => $data,
-            'primeirosEpisodios' => $primeirosEpisodios
+            'primeirosEpisodios' => $primeirosEpisodios,
+            'pagina' => $pagina,
+            'paginas' => $paginas,
         ]);
 
        

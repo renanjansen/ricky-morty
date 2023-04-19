@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-2 m-2" style="width: 18rem; background-color:#7FFFD4;">
+  <div class="card p-2 m-2 shadow-lg rounded" style="width: 18rem; background-color:#7FFFD4;">
     <img :src="imagem" class="card-img-top" :alt="nome">
     <div class="card-body">
       <h5 class="card-title">{{ nome }}</h5>
