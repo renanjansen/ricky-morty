@@ -15,3 +15,4 @@ use App\Http\Controllers\ApiRequestController;
 */
 
 Route::get('/' ,[ApiRequestController::class, 'requereApi','getEpisode'])->name('home');
+Route::get('/buscaPersonagem',[ApiRequestController::class, 'buscarPersonagem'])->name('buscaPersonagem');
