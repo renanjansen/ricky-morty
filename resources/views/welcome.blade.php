@@ -87,13 +87,25 @@
     </script>
 
     <script>
-            document.getElementById('personagemInput').addEventListener('change', function () {
+
+            document.getElementById('personagemInput').addEventListener('input', function() {
+                    // Atualiza o valor do campo oculto com o valor do campo de entrada
+                    document.getElementById('selectedPersonagem').value = this.value;
+                });
+
+            document.getElementById('buscaForm').addEventListener('submit', function(event) {
+                // Impede o envio do formulário se o campo de entrada estiver vazio
+                if (!document.getElementById('selectedPersonagem').value) {
+                    event.preventDefault();
+                }
+            });
+           /* document.getElementById('personagemInput').addEventListener('change', function () {
             var selectedOption = document.querySelector('#datalistOptions option[value="' + this.value + '"]');
             console.log(selectedOption);
             if (selectedOption) {
                 document.getElementById('selectedPersonagem').value = selectedOption.value;
             }
-        });
+        });*/
 
         var meuBotaoNext = document.getElementById("nextBtn");
         var valorAtual = meuBotaoNext.value;

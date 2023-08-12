@@ -84,6 +84,29 @@ class ApiRequestController extends Controller
     }
 
     public function buscarPersonagem(Request $request){
-        dd($request->input('selectedPersonagem'));
+
+        $personagemNome = $request->input('selectedPersonagem');
+
+        $client = new Client();
+        $urlPersonagen = 'https://rickandmortyapi.com/api/character/?name=' . $personagemNome;
+
+
+        $respostaPersonagem = $client->request('GET', $urlPersonagen);
+        //dd($respostaPersonagem);
+        $streamPersonagem = $respostaPersonagem->getBody();
+
+        $contentPersonagen = json_decode($streamPersonagem->getContents());
+        $data = $contentPersonagen->results;
+        $primeirosEpisodios = [];
+
+        foreach ($data as $personagens) {
+            array_push($primeirosEpisodios, $this->getEpisode($personagens->episode[0]));
+        };
+       // dd($contentPersonagen);
+
+        return view('buscaPersonagem', [
+            'data' => $data,
+            'primeirosEpisodios' => $primeirosEpisodios
+        ]);
     }
 }
