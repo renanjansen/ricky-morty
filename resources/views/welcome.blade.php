@@ -4,12 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Apllicaton CSS -->
     <link rel="stylesheet" type="text/css" href="/css/welcome.blade.css" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
     <title>Rick & Morty</title>
 </head>
@@ -18,36 +24,38 @@
     <div class="container-fluid p-5" id="app">
         <div class="row row-cols-auto d-flex justify-content-center">
             <div class="col-12">
-                <form class="d-flex async-form" action={{ route('buscaPersonagem') }} method="GET">
-                    <input class="form-control me-2 mb-2" type="search" placeholder="Buscar Personagens" name="buscar"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal" aria-label="Buscar" required>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <input class="form-control me-2 mb-2" type="search"
-                                        placeholder="Buscar Personagens" name="buscar" aria-label="Buscar" required>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="list-group">
-                                        <a href="#" class="list-group-item list-group-item-action">A second link
-                                            item</a>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                                </div>
+                    <input class="form-control me-2 mb-2" type="search" placeholder="Buscar Personagens" name="busca"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal" aria-label="Buscar">
+                    <form class="d-flex" action={{ route('buscaPersonagem') }} method="GET">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content bg-transparent">
+                            <div class="modal-header">
+                                <input class="form-control" list="datalistOptions" id="personagemInput"
+                                    placeholder="Buscar Pesonagem...">
                             </div>
+                            <div class="modal-body">
+                                <datalist class="select 2" id="datalistOptions">
+                                    @foreach ($listaDePersonagens as $personagem)
+                                        <option value="{{ $personagem->name }}">
+                                        </option>
+                                    @endforeach
+                                </datalist>
+                                <input type="hidden" name="selectedPersonagem" id="selectedPersonagem">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                            </div>
+                        </form>
                         </div>
                     </div>
-                </form>
-
+                </div>
             </div>
             @for ($i = 0; $i < count($data); $i++)
-               <card nome="{{ $data[$i]->name }}" especie="{{ $data[$i]->name }}" imagem="{{ $data[$i]->image }}"
+                <card nome="{{ $data[$i]->name }}" especie="{{ $data[$i]->name }}" imagem="{{ $data[$i]->image }}"
                     id="{{ $data[$i]->id }}" genero="{{ $data[$i]->gender }}"
                     nome_original="{{ $data[$i]->origin->name }}" localizacao="{{ $data[$i]->location->name }}"
                     status="{{ $data[$i]->status }}" episode="{{ $primeirosEpisodios[$i] }}"></card>
@@ -79,6 +87,14 @@
     </script>
 
     <script>
+            document.getElementById('personagemInput').addEventListener('change', function () {
+            var selectedOption = document.querySelector('#datalistOptions option[value="' + this.value + '"]');
+            console.log(selectedOption);
+            if (selectedOption) {
+                document.getElementById('selectedPersonagem').value = selectedOption.value;
+            }
+        });
+
         var meuBotaoNext = document.getElementById("nextBtn");
         var valorAtual = meuBotaoNext.value;
         meuBotaoNext.addEventListener("click", function() {
@@ -98,6 +114,11 @@
             meuBotaoPrev.disabled = true;
         }
     </script>
+
+
+
+
+
 </body>
 
 </html>

@@ -67,7 +67,8 @@ class ApiRequestController extends Controller
 
         $data = $content->results;
         $primeirosEpisodios = [];
-
+        $listaDePersonagens = $this->getPersonagens($count);
+       // dd($listaDePersonagens);
 
         foreach ($data as $personagens) {
             array_push($primeirosEpisodios, $this->getEpisode($personagens->episode[0]));
@@ -78,6 +79,11 @@ class ApiRequestController extends Controller
             'primeirosEpisodios' => $primeirosEpisodios,
             'pagina' => $pagina,
             'paginas' => $paginas,
+            'listaDePersonagens' => $listaDePersonagens
         ]);
+    }
+
+    public function buscarPersonagem(Request $request){
+        dd($request->input('selectedPersonagem'));
     }
 }
