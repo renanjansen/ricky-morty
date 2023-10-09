@@ -52,7 +52,6 @@ class ApiRequestController extends Controller
     {
         $client = new Client();
         $pagina = $request->id;
-        dump($pagina);
 
         $url = 'https://rickandmortyapi.com/api/character/?page=' . $pagina;
 
