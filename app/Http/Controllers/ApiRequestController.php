@@ -52,6 +52,7 @@ class ApiRequestController extends Controller
     {
         $client = new Client();
         $pagina = $request->id;
+        dump($pagina);
 
         $url = 'https://rickandmortyapi.com/api/character/?page=' . $pagina;
 
@@ -73,6 +74,7 @@ class ApiRequestController extends Controller
         foreach ($data as $personagens) {
             array_push($primeirosEpisodios, $this->getEpisode($personagens->episode[0]));
         };
+
 
         return view('welcome', [
             'data' => $data,

@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Apllicaton CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/welcome.blade.css" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,12 +13,17 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
 
     <title>Rick & Morty</title>
 </head>
 
 <body class="container text-center bg-dark">
+        <!-- Tela de carregamento -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-text">Carregando...</div>
+        </div>
     <div class="container-fluid p-5" id="app">
         <div class="row row-cols-auto d-flex justify-content-center">
             <div class="col-12">
@@ -65,13 +68,13 @@
 
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-primary" id="prevBtn" name="id"
-                    value={{ $pagina }}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    value={{ $pagina - 1}}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                             d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                     </svg>Anterior</button>
                 <button type="submit" class="btn btn-primary" id="nextBtn" name="id"
-                    value={{ $pagina }}>Próximo <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    value={{ $pagina + 1 }}>Próximo <svg xmlns="http://www.w3.org/2000/svg" width="16"
                         height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                             d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
@@ -93,13 +96,13 @@
                     document.getElementById('selectedPersonagem').value = this.value;
                 });
 
-            document.getElementById('buscaForm').addEventListener('submit', function(event) {
+           /* document.getElementById('buscaForm').addEventListener('submit', function(event) {
                 // Impede o envio do formulário se o campo de entrada estiver vazio
                 if (!document.getElementById('selectedPersonagem').value) {
                     event.preventDefault();
                 }
             });
-           /* document.getElementById('personagemInput').addEventListener('change', function () {
+            document.getElementById('personagemInput').addEventListener('change', function () {
             var selectedOption = document.querySelector('#datalistOptions option[value="' + this.value + '"]');
             console.log(selectedOption);
             if (selectedOption) {
@@ -110,19 +113,43 @@
         var meuBotaoNext = document.getElementById("nextBtn");
         var valorAtual = meuBotaoNext.value;
         meuBotaoNext.addEventListener("click", function() {
-            valorAtual++;
-            meuBotaoNext.value = valorAtual;
+            // Mostrar a tela de carregamento usando o plugin $.LoadingOverlay
+            $.LoadingOverlay("show", {
+                image: "",
+                custom: $("<div>", {
+                    text: "Carregando...",
+                    class: "loading-text"
+                }),
+            });
+
+            // Realizar o redirecionamento após algum tempo simulado
+            setTimeout(() => {
+                $.LoadingOverlay("text");
+            }, 1000);
+
         });
 
         var meuBotaoPrev = document.getElementById("prevBtn");
         var valorAtual = meuBotaoPrev.value;
         meuBotaoPrev.addEventListener("click", function() {
-            valorAtual--;
-            meuBotaoPrev.value = valorAtual;
+            // Mostrar a tela de carregamento usando o plugin $.LoadingOverlay
+            $.LoadingOverlay("show", {
+                image: "",
+                custom: $("<div>", {
+                    text: "Carregando...",
+                    class: "loading-text"
+                }),
+            });
+
+            // Realizar o redirecionamento após algum tempo simulado
+            setTimeout(() => {
+                $.LoadingOverlay("text");
+            }, 1000);
+
         });
 
-        if (valorAtual <= 1) {
-
+        if (valorAtual < 1) {
+            console.warn("valor atual é menor que 1");
             meuBotaoPrev.disabled = true;
         }
     </script>

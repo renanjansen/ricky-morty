@@ -65,12 +65,8 @@ button.addEventListener('click', () => {
 
     // Realizar o redirecionamento após algum tempo simulado
     setTimeout(() => {
-        // Esconder a tela de carregamento
-        $.LoadingOverlay("hide");
-
-        // Redirecionar para a URL desejada
-        window.location.href = '/';
-    }, 4000); // 4000 milissegundos (4 segundos)
+        $.LoadingOverlay("text");
+    }, 1000);
 });
 
 
