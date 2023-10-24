@@ -1,6 +1,6 @@
 <template>
     <div>
-        oi
+        <h1 class="text-warning">Async Form</h1>
     </div>
 </template>
 

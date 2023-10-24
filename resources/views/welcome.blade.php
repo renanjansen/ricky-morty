@@ -27,6 +27,7 @@
     </div>
     <div class="container-fluid p-5" id="app">
         <div class="row row-cols-auto d-flex justify-content-center">
+            <async></async>
             <div class="col-12">
                 <input class="form-control me-2 mb-2" type="search" placeholder="Buscar Personagens" name="busca"
                     data-bs-toggle="modal" data-bs-target="#exampleModal" aria-label="Buscar">
@@ -84,7 +85,7 @@
         </div>
     </form>
 
-    
+
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Bootstrap Bundle with Popper -->
